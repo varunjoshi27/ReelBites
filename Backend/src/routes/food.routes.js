@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-
-// This API is used to create the food item should be created in the Database
+const foodController = require('../controllers/food.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 /*   POST (/api/food/) {Protected } */
-router.post('/');
+router.post(
+  '/',
+  authMiddleware.authFoodPartnerMiddleware,
+  foodController.createFood
+);
 
 module.export = router;
